@@ -41,7 +41,7 @@ class Program
                 {
                     var id = Convert.ToInt32(JsonConvert.SerializeObject(json_object["Body"]["ID"]));
                     List<Product> list = controller.FindbyID(id);
-                    CreateTuck(list);
+                    CreateTuck(list);//gogo
 
                 }
                 if (Method == "POST")
