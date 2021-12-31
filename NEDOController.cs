@@ -38,6 +38,9 @@ namespace Rabbit
                 db.product.Add(product);
                 db.SaveChanges();
                 List<Product> listProduct = new List<Product>() { product };
+                Console.WriteLine(product.ID);
+                Console.WriteLine(product.Name);
+                Console.WriteLine(product.Price);
                 return listProduct;
             }
 

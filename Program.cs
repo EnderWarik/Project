@@ -37,33 +37,36 @@ class Program
                     CreateTuck(list);
 
                 }
-                if (Method == "GETBYID")
+                if (Method == "\"GETBYID\"")
                 {
-                    var id = Convert.ToInt32(JsonConvert.SerializeObject(json_object["Body"]["ID"]));
+                    //var ided = JsonConvert.SerializeObject(json_object["Body"]["ID"]);
+                    var id = Convert.ToInt32((string)json_object["Body"]["ID"]);
                     List<Product> list = controller.FindbyID(id);
                     CreateTuck(list);//gogo
 
                 }
-                if (Method == "POST")
+                if (Method == "\"POST\"")
                 {
-                    var price = Convert.ToInt32(JsonConvert.SerializeObject(json_object["Body"]["Price"]));
-                    var name = JsonConvert.SerializeObject(json_object["Body"]["Name"]);
+                    var price = Convert.ToInt32((string)json_object["Body"]["Price"]);
+                    var namejson = JsonConvert.SerializeObject((string)json_object["Body"]["Name"]);
+                    string name = namejson.Substring(1, namejson.Length - 2);
                     List<Product> list = controller.Create(new Product {Name = name,Price= price });
                     CreateTuck(list);
 
                 }
-                if (Method == "PUT")
+                if (Method == "\"PUT\"")
                 {
-                    var id = Convert.ToInt32(JsonConvert.SerializeObject(json_object["Body"]["ID"]));
-                    var price = Convert.ToInt32(JsonConvert.SerializeObject(json_object["Body"]["Price"]));
-                    var name = JsonConvert.SerializeObject(json_object["Body"]["Name"]);
-                    List<Product> list = controller.Update(id,new Product { Name = name, Price = price });
+                    var id = Convert.ToInt32((string)json_object["Body"]["ID"]);
+                    var price = Convert.ToInt32((string)json_object["Body"]["Price"]);
+                    var namejson = JsonConvert.SerializeObject((string)json_object["Body"]["Name"]);
+                    string name = namejson.Substring(1, namejson.Length - 2);
+                    List<Product> list = controller.Update(id,new Product {ID = id, Name = name, Price = price });
                     CreateTuck(list);
 
                 }
-                if (Method == "POST")
+                if (Method == "\"DELETE\"")
                 {
-                    var id = Convert.ToInt32(JsonConvert.SerializeObject(json_object["Body"]["ID"]));
+                    var id = Convert.ToInt32((string)json_object["Body"]["ID"]);
                     List<Product> list = controller.Delete(id);
                     CreateTuck(list);
 
@@ -102,6 +105,14 @@ class Program
             //Product data2 = JsonConvert.DeserializeObject<Product>(message);
             //string m = JsonConvert.SerializeObject(list);
             //var test = JsonConvert.DeserializeObject(m);
+            var id = 2;
+            var my_jsondata = new
+            {
+                Name = "POST",
+                Price = "2"
+            };
+            
+
             string message = JsonConvert.SerializeObject(list);
             //var json_object = JsonConvert.DeserializeObject<IEnumerable<dynamic>>(message);
             //string messageq = JsonConvert.SerializeObject(json_object);
